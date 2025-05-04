@@ -5,7 +5,7 @@
 // @author crackbob
 // @homepage https://github.com/crackbob/Typing-com-Cheat
 // @supportURL https://github.com/crackbob/Typing-com-Cheat
-// @match *://typing.com/*
+// @match https://www.typing.com/*
 // @grant none
 // ==/UserScript==
 

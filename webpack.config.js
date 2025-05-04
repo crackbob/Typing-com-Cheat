@@ -29,7 +29,7 @@ const userscriptConfig = {
                 description: "we do a little trolling",
                 version: "1.0.0",
                 author: "crackbob",
-                match: "*://typing.com/*",
+                match: "https://www.typing.com/*",
                 grant: "none",
             },
         }),
