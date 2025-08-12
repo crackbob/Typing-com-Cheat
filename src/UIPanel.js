@@ -69,8 +69,42 @@ export default class {
         button.style.border = 'none';
         button.style.borderRadius = '4px';
         button.style.cursor = 'pointer';
-        button.addEventListener("click", callback);
+
+        button.addEventListener("click", () => callback(button));
 
         this.panel.appendChild(button);
+        return button;
+    }
+
+    addSlider(label, min, max, initial, step, onChange) {
+        let container = document.createElement('div');
+        container.style.marginTop = '10px';
+
+        let labelEl = document.createElement('label');
+        labelEl.innerText = `${label}: ${initial}ms`;
+        labelEl.style.color = 'white';
+        labelEl.style.display = 'block';
+        labelEl.style.marginBottom = '4px';
+
+        let slider = document.createElement('input');
+        slider.type = 'range';
+        slider.min = min;
+        slider.max = max;
+        slider.value = initial;
+        slider.step = step;
+
+        slider.style.width = "100%";
+        slider.style.backgroundColor = "rgba(25, 25, 25, 0.75)";
+        slider.style.border = "none";
+        slider.style.padding = "2px 2px";
+
+        slider.addEventListener('input', () => {
+            labelEl.innerText = `${label}: ${slider.value}ms`;
+            onChange(Number(slider.value));
+        });
+
+        container.appendChild(labelEl);
+        container.appendChild(slider);
+        this.panel.appendChild(container);
     }
 }
