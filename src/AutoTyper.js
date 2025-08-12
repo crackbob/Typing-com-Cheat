@@ -54,16 +54,27 @@ export default class AutoTyper {
         ).exports;
 
         const _updateTransform = targetModule.default.prototype.updateTransform;
-        targetModule.default.prototype.updateTransform = () => {
-            const letters = this._getGameLetters();
-            this._typeLetters(letters, sendKey, () => {
-                this.stop();
-                this.onComplete();
+        let autoTyperRef = this;
+        targetModule.default.prototype.updateTransform = function () {
+            const letters = autoTyperRef.extractAllLetters(this.controller.config.words);
+            autoTyperRef._typeLetters(letters, sendKey, () => {
+                autoTyperRef.stop();
+                autoTyperRef.onComplete();
             });
 
             targetModule.default.prototype.updateTransform = _updateTransform;
             return _updateTransform.apply(this, arguments);
         };
+    }
+
+    extractAllLetters(words) {
+        const letters = [];
+        words.forEach(word => {
+            for (let letter of word) {
+            letters.push(letter);
+            }
+        });
+        return letters;
     }
 
     _handleNormalTyping(sendKey) {
